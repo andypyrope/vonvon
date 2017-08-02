@@ -1,0 +1,25 @@
+{
+  "name": "vonvon",
+  "version": "0.1.0",
+  "description": "(´･ω･`)",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andypyrope/vonvon.git"
+  },
+  "keywords": [
+    "von"
+  ],
+  "author": "alalev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andypyrope/vonvon/issues"
+  },
+  "homepage": "https://github.com/andypyrope/vonvon#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}

@@ -5,6 +5,10 @@
   "main": "index.js",
   "scripts": {
     "run": "node index",
+    "server:debug": "node --inspect --nolazy index",
+    "server:debug-brk": "node --inspect-brk --nolazy index",
+    "tools:build": "tsc -p ./tools/tsconfig.json",
+    "tools:watch": "tsc -w -p ./tools/tsconfig.json",
     "test": "gulp test"
   },
   "repository": {
@@ -21,13 +25,36 @@
   },
   "homepage": "https://github.com/andypyrope/vonvon#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "@alalev/modular": "^1.1.2",
+    "@types/del": "^3.0.0",
+    "@types/find": "^0.2.0",
+    "@types/gulp": "^4.0.5",
+    "@types/gulp-clean-dest": "^0.2.0",
+    "@types/gulp-less": "0.0.31",
+    "@types/gulp-sourcemaps": "0.0.32",
+    "@types/jasmine": "^2.6.3",
+    "@types/orchestrator": "^0.3.2",
+    "del": "^3.0.0",
+    "find": "^0.2.7",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-clean-dest": "^0.2.0",
+    "gulp-ignore": "^2.0.2",
+    "gulp-jasmine": "^2.4.2",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-tslint": "^8.1.2",
+    "gulp-typescript": "^3.2.3",
+    "jasmine": "^2.8.0",
+    "merge2": "^1.2.0",
+    "run-sequence": "^2.2.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1"
   },
   "dependencies": {
-    "body-parser": "^1.17.2",
+    "@types/express": "^4.0.39",
+    "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
-    "express": "^4.15.3",
-    "morgan": "^1.8.2",
-    "serve-favicon": "^2.4.3"
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "serve-favicon": "^2.4.5"
   }
 }

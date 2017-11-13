@@ -1,0 +1,14 @@
+{
+   "compilerOptions": {
+      "declaration": true,
+      "experimentalDecorators": true,
+      "module": "commonjs",
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "alwaysStrict": true,
+      "preserveConstEnums": true,
+      "removeComments": false,
+      "sourceMap": true
+   }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ProjectRoot
+   xmlns="https://github.com/andypyrope/modular" webpackFile="webpack.config.js" tsFolder="src" stylesFolder="css">
+   <Directory name=".">
+      <Module id="server" type="server"/>
+   </Directory>
+</ProjectRoot>

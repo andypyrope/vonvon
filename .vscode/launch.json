@@ -9,6 +9,35 @@
          "request": "attach",
          "name": "Attach to server",
          "port": 5858
+      },
+      {
+         "type": "node",
+         "request": "launch",
+         "name": "Gulp build:server",
+         "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+         "args": [
+            "build:server"
+         ],
+         "sourceMaps": true,
+         "outFiles": [
+            "${workspaceRoot}/tools/dist/**/*.js"
+         ],
+         "cwd": "${workspaceRoot}"
+      },
+      {
+         "type": "node",
+         "request": "launch",
+         "name": "Debug server",
+         "program": "${workspaceRoot}/index.js",
+         "args": [
+            "run",
+            "debug-server"
+         ],
+         "sourceMaps": true,
+         "outFiles": [
+            "${workspaceRoot}/**/dist/**/*.js"
+         ],
+         "cwd": "${workspaceRoot}"
       }
    ]
 }

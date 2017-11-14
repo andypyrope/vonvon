@@ -1,5 +1,9 @@
 {
    "vsicons.presets.angular": false,
+
+   "files.autoSave": "afterDelay",
+   "files.autoSaveDelay": 5000,
+
    // Columns at which to show vertical rulers
    "editor.rulers": [
       89

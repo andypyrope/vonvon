@@ -1,3 +1,5 @@
+/// <reference types="jasmine" />
+
 import * as find from "find";
 import * as fs from "fs";
 import { Colour } from "./Colour";
@@ -22,11 +24,11 @@ interface CompiledSpecInfo {
    name: string;
    fullName: string;
    file: string;
-   errors: Error[];
+   errors: jasmine.FailedExpectation[];
    location?: string;
 }
 
-export class JasmineReporter {
+export class JasmineReporter implements jasmine.CustomReporter {
    /**
     * The maximum amount of time in which no progress should be printed.
     * Once it has elapsed it is mandatory to print the progress.
@@ -66,14 +68,17 @@ export class JasmineReporter {
    specStarted(spec: SpecStartedInfo): void {
       const whenPosition: number = spec.fullName.lastIndexOf("WHEN");
       const thenPosition: number = spec.fullName.indexOf("THEN");
+      const whenFound: boolean = whenPosition !== -1;
+      const thenFound: boolean = thenPosition !== -1;
       let specIsOkay: boolean = false;
-      if (whenPosition !== -1 && thenPosition !== -1 && thenPosition < whenPosition) {
+
+      if (whenFound && thenFound && thenPosition < whenPosition) {
          console.warn("Spec " + Colour.yellow(spec.fullName) +
             "' contains 'THEN' before 'WHEN' in its description");
-      } else if (whenPosition !== -1 && thenPosition === -1) {
+      } else if (whenFound && !thenFound) {
          console.warn("Spec " + Colour.yellow(spec.fullName) +
             "' contains 'WHEN' but  not 'THEN' in its description");
-      } else if (whenPosition === -1 && thenPosition !== -1) {
+      } else if (!whenFound && thenFound) {
          console.warn("Spec " + Colour.yellow(spec.fullName) +
             "' contains 'THEN' but  not 'WHEN' in its description");
       } else {
@@ -86,7 +91,7 @@ export class JasmineReporter {
       }
    }
 
-   specDone(spec: SpecResult): void {
+   specDone(spec: jasmine.CustomReporterResult): void {
       if (spec.status === "disabled") {
          return;
       }
@@ -95,7 +100,7 @@ export class JasmineReporter {
          this.e2eTestsRun++;
       }
 
-      if (spec.failedExpectations.length) {
+      if (spec.failedExpectations && spec.failedExpectations.length) {
          this.failedSpecs++;
          if (this.isE2e(spec)) {
             this.failedE2eTests++;
@@ -188,8 +193,11 @@ export class JasmineReporter {
          if (spec.location) {
             console.log(" ==>  " + Colour.blue(spec.location));
          }
-         for (let j: number = 0; j < spec.errors.length; j++) {
-            console.error(spec.errors[j].stack);
+         for (const error of spec.errors) {
+            console.log("Failure  :: " + error.message);
+            console.log("Expected :: " + Colour.yellow(error.expected));
+            console.log("Actual   :: " + Colour.red(error.actual));
+            console.error(error.stack);
          }
       }
    }
